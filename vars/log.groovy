@@ -6,24 +6,16 @@
 //    echo "WARNING: ${message}"
 //}
 
-def call() {
+def call(){
     pipeline {
         agent any
         stages {
-          stage ( 'one'){
-              steps {
-                  sh 'echo One'
+            stage( 'one'){
+                steps {
+                    sh 'echo One'
 
-              }
-          }
-          stage {
-              stage ( 'Two'){
-                  steps{
-                      sh 'echo Two'
-                  }
-              }
-          }
+                }
+            }
         }
-
     }
 }
