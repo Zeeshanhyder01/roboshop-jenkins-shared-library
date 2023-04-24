@@ -17,10 +17,13 @@ def publishArtifacts(){
 
         }
     }
-//stage(' Push Artifacts to Nexus'){
-//  sh """
-//     curl -v -u admin:786110 --upload-file pom.xml http://localhost:8081/repository/maven-releases/org/foo/1.0/foo-1.0.pom
-//  """
-//  }
+stage(' Push Artifacts to Nexus'){
+    withCredentials([usernamePassword(credentialsId: 'nexus', passwordVariable: 'pass', usernameVariable: 'user')]) {
+        sh """
+           curl -v -u $(user):$(pass)  --upload-file ${COMPONENT}-${TAG_NAME}.zip  http://172.31.5.112:8081/repository/${COMPONENT}/${COMPONENT}-${TAG_NAME}.zip
+        """
+    }
+
+  }
 }
 
