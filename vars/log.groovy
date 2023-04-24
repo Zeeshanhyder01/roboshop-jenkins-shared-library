@@ -16,9 +16,9 @@ def call(){
 
                 }
             }
-            stage( 'one'){
+            stage( 'Two'){
                 steps {
-                    sh 'echo One ${COMPONENT}'
+                    sh 'echo Two ${COMPONENT}'
 
                 }
             }
