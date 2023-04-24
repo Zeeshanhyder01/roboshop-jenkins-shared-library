@@ -16,6 +16,13 @@ def publishArtifacts(){
     """
 
         }
+        if(env.APP_TYPE == "maven" ){
+            sh """
+                cp target/${COMPONENT}-1.0.1.jar ${COMPONENT}.jar
+       zip -r ${COMPONENT}-${TAG_NAME}.zip ${COMPONENT}.jar   
+    """
+
+        }
     }
 stage(' Push Artifacts to Nexus'){
     withCredentials([usernamePassword(credentialsId: 'nexus', passwordVariable: 'pass', usernameVariable: 'user')]) {
@@ -23,7 +30,7 @@ stage(' Push Artifacts to Nexus'){
            curl -v -u ${user}:${pass}  --upload-file ${COMPONENT}-${TAG_NAME}.zip  http://172.31.5.112:8081/repository/${COMPONENT}/${COMPONENT}-${TAG_NAME}.zip
         """
     }
-
+ 
   }
 }
 
