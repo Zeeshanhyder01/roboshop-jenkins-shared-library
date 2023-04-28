@@ -37,5 +37,4 @@ def publishArtifacts() {
 
         }
     }
-
 }
